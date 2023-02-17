@@ -54,12 +54,10 @@ function showDialog(dialog,show) {
     if(show) {
         id(dialog).style.display='block';
         currentDialog=dialog;
-        id('newButton').style.display='none';
     }
     else {
         id(dialog).style.display='none';
         currentDialog=null;
-        id('newButton').style.display='block';
     }
 }
 
