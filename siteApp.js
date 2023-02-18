@@ -7,6 +7,12 @@ function id(el) {
 var db=null;
 var list={};
 var currentListItem=null;
+var sets=[{'name':'Bonsall Barns','images':['SK274577','SK273588','SK266572','SK262575','SK241598','SK259579']},
+{'name':'birds','images':['buzzard','avocet']},
+{'name':'Orkney','images':['Kirkwall Street','Stones of Stenness','Marwick']}];
+var setIndex;
+var images=[];
+var image;
 var currentDialog='messageDialog';
 var depth=0; // 0 is project list; 1 is element list; 2 is layer laist
 var dragStart={};
@@ -41,6 +47,33 @@ id('header').addEventListener('click',function() {
 	
 });
 
+// LIST SETS
+function listSets() {
+	for(var i in sets) {
+		console.log('set '+i+': '+sets[i].name+'; images...');
+		for(var j in sets[i].images) console.log(sets[i].images[j]);
+		var listItem = document.createElement('li');
+		listItem.classList.add('set');
+		listItem.index=i;
+		listItem.addEventListener('click', function(){setIndex=this.index; showSet();});
+		image=document.createElement('img');
+		image.classList.add('set-image');
+		image.src='images/'+sets[i].name+'/'+sets[i].images[0]+'.JPG';
+		console.log('set image: '+image.src);
+		listItem.appendChild(image);
+		var caption=document.createElement('div');
+		caption.classList.add('img-text');
+		caption.innerText=' '+sets[i].name+' ';
+		listItem.appendChild(caption);
+		id('list').appendChild(listItem);
+	}
+}
+
+// SHOW CURRENT SET
+function showSet() {
+	console.log('SHOW SET '+setIndex);
+}
+
 // DISPLAY MESSAGE
 function display(message) {
 	id('message').innerText=message;
@@ -62,6 +95,21 @@ function showDialog(dialog,show) {
 }
 
 //UTILITY FUNCTIONS
+function shuffle(array) {
+  var currentIndex=array.length;
+  var randomIndex;
+
+  // While there remain elements to shuffle.
+  while(currentIndex!==0) {
+    // Pick a remaining element.
+    randomIndex=Math.floor(Math.random()*currentIndex);
+    currentIndex--;
+    // And swap it with the current element.
+    [array[currentIndex],array[randomIndex]]=[array[randomIndex], array[currentIndex]];
+  }
+  return array;
+}
+
 function trim(text,len) {
 	if(text.length>len) return(text.substr(0,len-2)+'..');
 	else return text;
@@ -76,7 +124,11 @@ var request=window.indexedDB.open("siteDB",2);
 request.onsuccess=function (event) {
 	db=event.target.result;
 	console.log("DB open");
-	display('HI THERE');
+	// display('HI THERE');
+	sets=shuffle(sets); // at start, shuffle order of sets and of images in each set
+	for(var i in sets) sets[i].images=shuffle(sets[i].images); 
+	console.log('shuffled first set: '+sets[0].name+'; first image: '+sets[0].images[0]);
+	listSets();
 };
 // ***** DELETE layers OBJECT STORE ******
 request.onupgradeneeded=function(event) {
@@ -114,3 +166,5 @@ if (navigator.serviceWorker.controller) {
 		console.log('Service worker has been registered for scope:'+ reg.scope);
 	});
 }
+
+

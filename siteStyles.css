@@ -6,8 +6,8 @@ html, body {
   font-family: 'Helvetica', 'Verdana', sans-serif;
   font-weight: 400;
   font-display: optional;
-  color: white;
-  background-color: black;
+  color: black;
+  background-color: white;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
@@ -56,11 +56,29 @@ textarea {
 
 li {
 	width: 100%;
+	margin-top: 5px;
 	margin-bottom: 5px;
 	text-align: left;
 	font-size: 1.2em;
-	color: white;
+	color: black;
 	display: block;
+}
+
+.set {
+	position: relative;
+	text-align: center;
+}
+.set-image {
+	width: 100%;
+}
+.img-text {
+ 	position: absolute;
+ 	top: 10px;
+ 	left: 10px;
+ 	color: black;
+ 	background-color: white;
+ 	opacity: 0.5;
+ 	font-size: large;
 }
 
 .tabL {
@@ -111,6 +129,7 @@ li {
 }
 
 .dialog {
+  color: white;
   background: dimgray;
   position: absolute;
   top: 0;
@@ -183,31 +202,22 @@ li {
     top: 0;
     left: 0;
     width:100%;
-    height: 50px;
+    height: 20px;
     padding: 10px;
-    color: white;
+    color: black;
 	font-size: 1.2em;
-    background-color: black;
+    background-color: white;
     z-index: 10;
 }
 
-#headerTitle {
+#headerName {
 	top: 0;
 	font-weight: bold;
-	/* width: 60%; */
 }
 
-#headerValue {
+#headerTopic {
 	top: 0;
-	/* width: 30%; */
-	margin-right: 20px;
-	float: right;
-}
-
-#headerKey {
-	top: 24px;
-	width: 100%;
-	background-color='dimgray';
+	font-style: italic;
 }
 
 #main {
@@ -220,49 +230,16 @@ li {
   overflow-x: hidden;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  background-color: #333;
 }
   
 #list {
-    margin-top: 80px;
+    margin-top: 40px;
     list-style: none;
     display: flex;
     flex-direction: column;
     transition: opacity 0.2s ease-in-out;
     padding: 0 0.5em;
-}
-
-#elementArea, #thickness, #fraction, #materialThickness, #materialR, #materialV {
-	width: 50px;
-}
-
-#elementUval {
-	width: 70px;
-}
-
-#deleteProject, #deleteElement, #deleteLayer, #deleteMaterial {
-	float: left;
-	margin-right: 48px;
-	background: url(deleteButton24px.svg) center center no-repeat;
-}
-
-#saveProject, #saveElement, #saveLayer, #saveMaterial {
-    background: url(okButton24px.svg) center center no-repeat;
-    float: right;
-}
-
-#addProject, #addElement, #addLayer, #addMaterial {
-	background: url(newButton24px.svg) center center no-repeat;
-	float: right;
-}
-
-#materialsButton {
-	margin-right: 20px;
-	float: right;
-}
-
-#materialV {
-	width: 5em;
+    background: white;
 }
 
 #fileChooser {
