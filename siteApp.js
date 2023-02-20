@@ -4,21 +4,22 @@ function id(el) {
 'use strict';
 
 // GLOBAL VARIABLES	
-var db=null;
-var list={};
-var currentListItem=null;
-var sets=[{'name':'Bonsall Barns','images':['SK274577','SK273588','SK266572','SK262575','SK241598','SK259579']},
-{'name':'birds','images':['buzzard','avocet']},
-{'name':'Orkney','images':['Kirkwall Street','Stones of Stenness','Marwick']}];
+// var db=null;
+// var list={};
+// var currentListItem=null;
+var sets=[{'name':'Bonsall Barns','text':'Six ink A5 line drawings of barns in various states of repair around Bonsall in Derbyshire','images':['SK274577','SK273588','SK266572','SK262575','SK241598','SK259579']},
+{'name':'birds','text':'twenty A5 drawings and paintings of British birds','images':['house sparrow','lesser black-backed gull','cormorant','magpie','grey wagtail','greenfinch','hen harrier','black-throated diver','buzzard','avocet','eider','heron','jay','barn owl','swallow','song thrush','razorbill','nuthatch','mallard','marsh tit']},
+{'name':'Orkney','text':'Twelve A5 drawings and paintings around Orkney','images':['Kirkwall Street','Stones of Stenness','Marwick','Hoy Sound','Hoxa Head','Brodgar','Waulkmill Bay','Watchstone, Brodgar','Skaill Bay beach','Skaill Bay - Rippled Sand','Ring of Brodgar','Pier Arts Centre, Stromness']}];
 var setIndex;
 var images=[];
 var image;
-var currentDialog='messageDialog';
+var page=null;
+// var currentDialog='messageDialog';
 var depth=0; // 0 is project list; 1 is element list; 2 is layer laist
 var dragStart={};
 
  
-// DRAG TO CHANGE DEPTH
+// DRAG TO NAVIGATE
 id('main').addEventListener('touchstart', function(event) {
     dragStart.x=event.changedTouches[0].clientX;
     dragStart.y=event.changedTouches[0].clientY;
@@ -47,6 +48,27 @@ id('header').addEventListener('click',function() {
 	
 });
 
+// ACTION BUTTON
+id('action').addEventListener('click',function() {
+	if(page=='setList') {
+		console.log('MENU');
+		// show menu
+		id('menu').style.display='block';
+	}
+	else if(page=='set') {
+		console.log('BACK TO LIST');
+		id('set').style.display='none';
+		id('list').style.display='block';
+		page='setList';
+		id('action').style.background='url(menu.svg) center center no-repeat';
+	}
+})
+
+// CLOSE MENU
+id('close').addEventListener('click',function() {
+	id('menu').style.display='none';
+})
+
 // LIST SETS
 function listSets() {
 	for(var i in sets) {
@@ -67,12 +89,41 @@ function listSets() {
 		listItem.appendChild(caption);
 		id('list').appendChild(listItem);
 	}
+	page='setList';
+	// id('action').innerHTML='<img src="menu.svg"/>';
+	id('action').style.background='url(menu.svg) center center no-repeat';
 }
 
 // SHOW CURRENT SET
 function showSet() {
 	console.log('SHOW SET '+setIndex);
+	images=sets[setIndex].images;
+	image=0;
+	id('image').src='images/'+sets[setIndex].name+'/'+images[image]+'.JPG';
+	id('caption').innerText=images[image];
+	id('setTitle').innerHTML='<b>'+sets[setIndex].name+'</b>';
+	id('setText').innerHTML=sets[setIndex].text;
+	id('list').style.display='none';
+	id('set').style.display='block';
+	page='set';
+	id('action').style.background='url(back.svg) center center no-repeat';
 }
+
+// STEP THROUGH SET IMAGES
+id('previous').addEventListener('click',function() {
+	console.log('PREVIOUS IMAGE');
+	image--; // previous image
+	if(image<0) image=images.length-1; // loop back to last images
+	id('image').src='images/'+sets[setIndex].name+'/'+images[image]+'.JPG';
+	id('caption').innerText=images[image];
+})
+id('next').addEventListener('click',function() {
+	console.log('NEXT IMAGE');
+	image++; // previous image
+	if(image==images.length) image=0; // loop back to first image
+	id('image').src='images/'+sets[setIndex].name+'/'+images[image]+'.JPG';
+	id('caption').innerText=images[image];
+})
 
 // DISPLAY MESSAGE
 function display(message) {
@@ -117,11 +168,11 @@ function trim(text,len) {
 }
 
 // START-UP CODE
-lastSave=window.localStorage.getItem('lastSave');
-console.log("last save: "+lastSave);
+// lastSave=window.localStorage.getItem('lastSave');
+// console.log("last save: "+lastSave);
 // load items from database
-var request=window.indexedDB.open("siteDB",2);
-request.onsuccess=function (event) {
+// var request=window.indexedDB.open("siteDB",2);
+/* request.onsuccess=function (event) {
 	db=event.target.result;
 	console.log("DB open");
 	// display('HI THERE');
@@ -130,10 +181,15 @@ request.onsuccess=function (event) {
 	console.log('shuffled first set: '+sets[0].name+'; first image: '+sets[0].images[0]);
 	listSets();
 };
-// ***** DELETE layers OBJECT STORE ******
+
+var w=id('menu').offsetWidth;
+id('menu').style.left=(-1*w)+'px';
+*/
+listSets();
+/*
 request.onupgradeneeded=function(event) {
 	db=event.currentTarget.result;
-	/* SET UP OBJECT STORES
+	// SET UP OBJECT STORES
 	if(!db.objectStoreNames.contains('projects')) {
 		dbObjectStore=event.currentTarget.result.createObjectStore("projects",{
 			keyPath:'id',autoIncrement: true});
@@ -150,13 +206,12 @@ request.onupgradeneeded=function(event) {
 		dbObjectStore=event.currentTarget.result.createObjectStore("materials",{
 		keyPath:'id',autoIncrement: true});
 		console.log("materials store created");
-	*/
 }
 request.onerror=function(event) {
 	display("indexedDB error code "+event.target.errorCode);
 };
-	
-// implement service worker if browser is PWA friendly
+*/	
+/* implement service worker if browser is PWA friendly
 if (navigator.serviceWorker.controller) {
 	console.log('Active service worker found, no need to register')
 } else { //Register the ServiceWorker
@@ -166,5 +221,5 @@ if (navigator.serviceWorker.controller) {
 		console.log('Service worker has been registered for scope:'+ reg.scope);
 	});
 }
-
+*/
 

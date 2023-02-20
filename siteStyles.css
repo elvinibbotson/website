@@ -213,11 +213,13 @@ li {
 #headerName {
 	top: 0;
 	font-weight: bold;
+	margin-right: 20px;
+	float: right;
 }
 
 #headerTopic {
 	top: 0;
-	font-style: italic;
+	font-style: bold;
 }
 
 #main {
@@ -240,6 +242,62 @@ li {
     transition: opacity 0.2s ease-in-out;
     padding: 0 0.5em;
     background: white;
+}
+
+#set {
+	margin-top: 40px;
+	display: none;
+}
+
+#previous {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	left: 10px;
+	top: 50%;
+	border: none;
+	opacity: 0.5;
+	background: url(back.svg) center center no-repeat;
+}
+
+#next {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	right: 10px;
+	top: 50%;
+	border: none;
+	opacity: 0.5;
+	background: url(next.svg) center center no-repeat;
+}
+
+#setTitle, #setText {
+	padding: 10px;
+}
+
+#menu {
+	position: absolute;
+	top: 0;
+	left: 0;
+	color: white;
+	background: #333;
+	padding: 10px;
+	z-index: 50; 
+	display: none;
+}
+
+#action {
+	width: 20px;
+	height: 20px;
+	border: none;
+    background: url(menu.svg) center center no-repeat;
+}
+
+#action img {
+	display: block;
+	width: 20px;
+	height: 20px;
+	padding: 0px;
 }
 
 #fileChooser {

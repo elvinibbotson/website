@@ -6,13 +6,14 @@
     <meta name="theme-color" content="black">
     <title>elvin ibbotson</title>
     <link rel="stylesheet" type="text/css" href="siteStyles.css">
-    <link rel="manifest" href="siteManifest.json">
+    <!--link rel="manifest" href="siteManifest.json"-->
     <meta name="application-name" content="site">
 </head>
 <body>
     
 <div id='header'>
-	<span id='headerName'><img src='eiStamp.jpg' height='20px'> elvin ibbotson... </span>
+	<button id='action'></button>
+	<span id='headerName'> elvin ibbotson <img src='eiStamp.jpg' height='20px'></span>
 	<span id='headerTopic'>images</span>
 </div>
 
@@ -22,6 +23,24 @@
 			<img src='images/Bonsall Barns/SK273588.jpg' class='set-image'>
 			<div class='img-text'>Bonsall Barns</div>
 		</li-->
+	</div>
+	<div id='set'>
+		<div id='setImage' class='set'>
+			<img id='image' class='set-image'/>
+			<div id='caption' class='img-text'>caption</div>
+			<button id='previous'></button>
+			<button id='next'></button>
+		</div>
+		<div id='setTitle'></div>
+		<div id='setText'></div>
+	</div>
+	<div id='menu'>
+		<p id='close' ><img src='close.svg'/></p>
+		<p>IMAGES</p>
+		<p>SHOPPING</p>
+		<p>APPS</p>
+		<p>JOTTINGS</p>
+		<p>ABOUT</p>
 	</div>
 	<div id='messageDialog' class='dialog'><p id='message'></p></div>
 </div>
