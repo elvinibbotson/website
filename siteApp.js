@@ -11,62 +11,85 @@ var sets=[{'name':'Bonsall Barns','text':'Six ink A5 line drawings of barns in v
 {'name':'birds','text':'twenty A5 drawings and paintings of British birds','images':['house sparrow','lesser black-backed gull','cormorant','magpie','grey wagtail','greenfinch','hen harrier','black-throated diver','buzzard','avocet','eider','heron','jay','barn owl','swallow','song thrush','razorbill','nuthatch','mallard','marsh tit']},
 {'name':'Orkney','text':'Twelve A5 drawings and paintings around Orkney','images':['Kirkwall Street','Stones of Stenness','Marwick','Hoy Sound','Hoxa Head','Brodgar','Waulkmill Bay','Watchstone, Brodgar','Skaill Bay beach','Skaill Bay - Rippled Sand','Ring of Brodgar','Pier Arts Centre, Stromness']}];
 var setIndex;
+var selling=[{'name':'Bonsall Barns','text':'Available in the shop as a set of A5 black-and-white prints on cartridge paper with a map showing the locations of the barns'},
+{'name':'birds','text':'Available in the shop as a set of A5 colour and b&w prints on cartridge paper with a key sheet'}];
 var images=[];
 var image;
-var page=null;
+var page='setList'; // start with list of image sets
+var pages=['setList'];
 // var currentDialog='messageDialog';
-var depth=0; // 0 is project list; 1 is element list; 2 is layer laist
-var dragStart={};
+// var depth=0; // 0 is project list; 1 is element list; 2 is layer laist
+var dragStart=null;
+var swipeStart=null;
 
  
 // DRAG TO NAVIGATE
 id('main').addEventListener('touchstart', function(event) {
-    dragStart.x=event.changedTouches[0].clientX;
-    dragStart.y=event.changedTouches[0].clientY;
-    console.log('touch start at '+dragStart.x);
+    dragStart=event.changedTouches[0].clientX;
+    console.log('drag start at '+dragStart);
 })
 
 id('main').addEventListener('touchend', function(event) {
-    var drag={};
-    drag.x=dragStart.x-event.changedTouches[0].clientX;
-    drag.y=dragStart.y-event.changedTouches[0].clientY;
-    console.log('dragged '+drag.x+'; depth: '+depth);
-    if(Math.abs(drag.y)>50) return; // ignore vertical drags
-    if((drag.x<-50)&&(depth>0)) { // drag right to go back...
-        depth--;
+    var drag=dragStart-event.changedTouches[0].clientX;
+    console.log('dragged '+drag);
+    if(drag<-50) { // drag right to go back...
+        console.log('BACK from '+pages[pages.length-1]+' to '+pages[pages.length-2]);
+        var p=pages.pop();
+		console.log('hide '+p);
+    	id(p).style.display='none';
+    	page=pages[pages.length-1];
+    	console.log('show '+page);
+    	id(page).style.display='block';
+    	setHeader();
     }
-    else if(drag.x>50) { // drag left to close dialogs
-    	if(currentDialog) showDialog(currentDialog,false);
+    else if(drag>50) { // drag left to close dialogs
+    	console.log('FORWARDS');
     }
 })
-
-// TAP ON HEADER
-id('header').addEventListener('click',function() {
-	console.log('depth: '+depth);
-	switch(depth) {
-	}
-	
-});
 
 // ACTION BUTTON
 id('action').addEventListener('click',function() {
-	if(page=='setList') {
-		console.log('MENU');
-		// show menu
-		id('menu').style.display='block';
-	}
-	else if(page=='set') {
+	if(page=='set') {
 		console.log('BACK TO LIST');
 		id('set').style.display='none';
-		id('list').style.display='block';
+		id('setList').style.display='block';
 		page='setList';
+		pages.pop();
+		console.log(pages.length+' pages');
 		id('action').style.background='url(menu.svg) center center no-repeat';
+	}
+	else {
+		console.log('MENU');
+		id('menu').style.display='block';
 	}
 })
 
-// CLOSE MENU
-id('close').addEventListener('click',function() {
-	id('menu').style.display='none';
+// MENU OPTIONS
+id('close').addEventListener('click',closeMenu);
+id('imagesOption').addEventListener('click',function() {
+	console.log('go to images page');
+})
+id('shoppingOption').addEventListener('click',function() {
+	console.log('go from '+page+' to shopping page');
+	id(page).style.display='none';
+	page='shopping';
+	pages.push(page);
+	id(page).style.display='block';
+	id('headerTopic').innerHTML='SHOPPING';
+	closeMenu();
+})
+
+// SWIPE IMAGE
+id('setImage').addEventListener('touchstart',function(event) {
+	swipeStart=event.changedTouches[0].clientX;
+    console.log('swipe start at '+swipeStart);
+})
+id('setImage').addEventListener('touchend',function(event) {
+	var swipe=swipeStart-event.changedTouches[0].clientX;
+	event.stopPropagation(); // avoid swipe changing page
+    console.log('dragged '+swipe);
+    if(swipe<-50) previous(); // swipe right for previous image...
+    else if(swipe>50) next(); // swipe left for next image
 })
 
 // LIST SETS
@@ -87,7 +110,7 @@ function listSets() {
 		caption.classList.add('img-text');
 		caption.innerText=' '+sets[i].name+' ';
 		listItem.appendChild(caption);
-		id('list').appendChild(listItem);
+		id('setList').appendChild(listItem);
 	}
 	page='setList';
 	// id('action').innerHTML='<img src="menu.svg"/>';
@@ -103,27 +126,25 @@ function showSet() {
 	id('caption').innerText=images[image];
 	id('setTitle').innerHTML='<b>'+sets[setIndex].name+'</b>';
 	id('setText').innerHTML=sets[setIndex].text;
-	id('list').style.display='none';
+	var n=0;
+	found=false;
+	while(n<selling.length && !found) {
+		if(selling[n].name==sets[setIndex].name) found=true;
+		else n++;
+	}
+	console.log('found: '+found);
+	if(found) id('saleText').innerHTML=selling[n].text;
+	id('setList').style.display='none';
 	id('set').style.display='block';
 	page='set';
+	pages.push(page);
+	console.log(pages.length+' pages');
 	id('action').style.background='url(back.svg) center center no-repeat';
 }
 
 // STEP THROUGH SET IMAGES
-id('previous').addEventListener('click',function() {
-	console.log('PREVIOUS IMAGE');
-	image--; // previous image
-	if(image<0) image=images.length-1; // loop back to last images
-	id('image').src='images/'+sets[setIndex].name+'/'+images[image]+'.JPG';
-	id('caption').innerText=images[image];
-})
-id('next').addEventListener('click',function() {
-	console.log('NEXT IMAGE');
-	image++; // previous image
-	if(image==images.length) image=0; // loop back to first image
-	id('image').src='images/'+sets[setIndex].name+'/'+images[image]+'.JPG';
-	id('caption').innerText=images[image];
-})
+id('previous').addEventListener('click',previous);
+id('next').addEventListener('click',next);
 
 // DISPLAY MESSAGE
 function display(message) {
@@ -161,6 +182,45 @@ function shuffle(array) {
   return array;
 }
 
+function previous() {
+	console.log('PREVIOUS IMAGE');
+	image--; // previous image
+	if(image<0) image=images.length-1; // loop back to last images
+	id('image').src='images/'+sets[setIndex].name+'/'+images[image]+'.JPG';
+	id('caption').innerText=images[image];
+}
+
+function next() {
+	console.log('NEXT IMAGE');
+	image++; // previous image
+	if(image==images.length) image=0; // loop back to first image
+	id('image').src='images/'+sets[setIndex].name+'/'+images[image]+'.JPG';
+	id('caption').innerText=images[image];
+}
+
+function setHeader() {
+	console.log('set header for page '+page);
+	var title;
+	switch(page) {
+		case 'setList':
+		case 'set':
+			title='IMAGES';
+			break;
+		case 'shopping':
+			title='SHOPPING';
+			break;
+		case 'apps':
+			title='APPS';
+			break;
+		// etc
+	}
+	id('headerTopic').innerText=title;
+}
+
+function closeMenu() {
+	id('menu').style.display='none';
+}
+
 function trim(text,len) {
 	if(text.length>len) return(text.substr(0,len-2)+'..');
 	else return text;
@@ -185,6 +245,9 @@ function trim(text,len) {
 var w=id('menu').offsetWidth;
 id('menu').style.left=(-1*w)+'px';
 */
+sets=shuffle(sets); // at start, shuffle order of sets and of images in each set
+for(var i in sets) sets[i].images=shuffle(sets[i].images); 
+console.log('shuffled first set: '+sets[0].name+'; first image: '+sets[0].images[0]);
 listSets();
 /*
 request.onupgradeneeded=function(event) {

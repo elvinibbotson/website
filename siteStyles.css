@@ -77,7 +77,7 @@ li {
  	left: 10px;
  	color: black;
  	background-color: white;
- 	opacity: 0.5;
+ 	opacity: 0.7;
  	font-size: large;
 }
 
@@ -207,7 +207,7 @@ li {
     color: black;
 	font-size: 1.2em;
     background-color: white;
-    z-index: 10;
+    z-index: 50;
 }
 
 #headerName {
@@ -234,18 +234,22 @@ li {
   -webkit-overflow-scrolling: touch;
 }
   
-#list {
+#setList, #apps {
     margin-top: 40px;
+    padding: 10px;
     list-style: none;
     display: flex;
     flex-direction: column;
+    /*
     transition: opacity 0.2s ease-in-out;
     padding: 0 0.5em;
+    */
     background: white;
 }
 
-#set {
+#set, #shopping {
 	margin-top: 40px;
+	padding: 10px;
 	display: none;
 }
 
@@ -271,8 +275,13 @@ li {
 	background: url(next.svg) center center no-repeat;
 }
 
-#setTitle, #setText {
+#setTitle, #setText,#saleText {
 	padding: 10px;
+	color: #666;
+}
+
+#apps {
+	display='none';
 }
 
 #menu {
