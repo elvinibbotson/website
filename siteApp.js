@@ -9,7 +9,8 @@ function id(el) {
 // var currentListItem=null;
 var sets=[{'name':'Bonsall Barns','text':'Six ink A5 line drawings of barns in various states of repair around Bonsall in Derbyshire','images':['SK274577','SK273588','SK266572','SK262575','SK241598','SK259579']},
 {'name':'birds','text':'twenty A5 drawings and paintings of British birds','images':['house sparrow','lesser black-backed gull','cormorant','magpie','grey wagtail','greenfinch','hen harrier','black-throated diver','buzzard','avocet','eider','heron','jay','barn owl','swallow','song thrush','razorbill','nuthatch','mallard','marsh tit']},
-{'name':'Orkney','text':'Twelve A5 drawings and paintings around Orkney','images':['Kirkwall Street','Stones of Stenness','Marwick','Hoy Sound','Hoxa Head','Brodgar','Waulkmill Bay','Watchstone, Brodgar','Skaill Bay beach','Skaill Bay - Rippled Sand','Ring of Brodgar','Pier Arts Centre, Stromness']}];
+{'name':'Orkney','text':'Twelve A5 drawings and paintings around Orkney','images':['Kirkwall Street','Stones of Stenness','Marwick','Hoy Sound','Hoxa Head','Brodgar','Waulkmill Bay','Watchstone, Brodgar','Skaill Bay beach','Skaill Bay - Rippled Sand','Ring of Brodgar','Pier Arts Centre, Stromness']},
+{'name':'sheds','text':'Ten 15cm square drawings of everyday farm structures','images':['Alton pig farm','Cherry Orchard Farm barn','Cherry Orchard Farm sheds','fence','Hopton Lane shelter','Lawn Farm barn','Lawn Farm silo','Lawn Farm silos','Sandhall Farm','shepherd hut']}];
 var setIndex;
 var selling=[{'name':'Bonsall Barns','text':'Available in the shop as a set of A5 black-and-white prints on cartridge paper with a map showing the locations of the barns'},
 {'name':'birds','text':'Available in the shop as a set of A5 colour and b&w prints on cartridge paper with a key sheet'}];
@@ -32,7 +33,7 @@ id('main').addEventListener('touchstart', function(event) {
 id('main').addEventListener('touchend', function(event) {
     var drag=dragStart-event.changedTouches[0].clientX;
     console.log('dragged '+drag);
-    if(drag<-50) { // drag right to go back...
+    if((drag<-50)&&(pages.length>1)) { // drag right to go back...
         console.log('BACK from '+pages[pages.length-1]+' to '+pages[pages.length-2]);
         var p=pages.pop();
 		console.log('hide '+p);
@@ -215,6 +216,7 @@ function setHeader() {
 		// etc
 	}
 	id('headerTopic').innerText=title;
+	id('action').style.background='url(menu.svg) center center no-repeat';
 }
 
 function closeMenu() {
