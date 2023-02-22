@@ -33,9 +33,10 @@ id('main').addEventListener('touchstart', function(event) {
 id('main').addEventListener('touchend', function(event) {
     var drag=dragStart-event.changedTouches[0].clientX;
     console.log('dragged '+drag);
+    var p;
     if((drag<-50)&&(pages.length>1)) { // drag right to go back...
         console.log('BACK from '+pages[pages.length-1]+' to '+pages[pages.length-2]);
-        var p=pages.pop();
+        p=pages.pop();
 		console.log('hide '+p);
     	id(p).style.display='none';
     	page=pages[pages.length-1];
@@ -45,6 +46,25 @@ id('main').addEventListener('touchend', function(event) {
     }
     else if(drag>50) { // drag left to close dialogs
     	console.log('FORWARDS');
+    	p=pages[pages.length-1];
+    	id(p).style.display='none';
+    	switch(p) {
+    		case 'setList':
+    		case 'set':
+    			page='shopping';
+    			break;
+    		case 'shopping':
+    			page='apps';
+    			break;
+    		case 'apps':
+    			page='jottings';
+    			break;
+    		case 'jottings':
+    			page='about';
+    	}
+    	pages.push(page);
+    	id(page).style.display='block';
+    	setHeader();
     }
 })
 
@@ -77,6 +97,24 @@ id('shoppingOption').addEventListener('click',function() {
 	pages.push(page);
 	id(page).style.display='block';
 	id('headerTopic').innerHTML='SHOPPING';
+	closeMenu();
+})
+id('appsOption').addEventListener('click',function() {
+	console.log('go from '+page+' to apps page');
+	id(page).style.display='none';
+	page='apps';
+	pages.push(page);
+	id(page).style.display='block';
+	id('headerTopic').innerHTML='APPS';
+	closeMenu();
+})
+id('aboutOption').addEventListener('click',function() {
+	console.log('go from '+page+' to shopping page');
+	id(page).style.display='none';
+	page='about';
+	pages.push(page);
+	id(page).style.display='block';
+	id('headerTopic').innerHTML='ABOUT';
 	closeMenu();
 })
 

@@ -234,20 +234,16 @@ li {
   -webkit-overflow-scrolling: touch;
 }
   
-#setList, #apps {
+#setList, #appList {
     margin-top: 40px;
     padding: 10px;
     list-style: none;
     display: flex;
     flex-direction: column;
-    /*
-    transition: opacity 0.2s ease-in-out;
-    padding: 0 0.5em;
-    */
     background: white;
 }
 
-#set, #shopping {
+#set, #shopping, #apps, #about {
 	margin-top: 40px;
 	padding: 10px;
 	display: none;
@@ -293,6 +289,11 @@ li {
 	padding: 10px;
 	z-index: 50; 
 	display: none;
+}
+
+#menu a {
+	color: white;
+	text-decoration: none;
 }
 
 #action {
