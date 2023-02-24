@@ -194,7 +194,7 @@ function showSet() {
 	}
 	console.log('found: '+found);
 	if(found) {
-		id('saleText').innerHTML=selling[n].text+'<br><button class="text-button">BUY</button>'; // add onclick to got to right page at shop site
+		id('saleText').innerHTML=selling[n].text+'<br><a href="https://elvinibbotson.bigcartel.com/product/bonsall-barns"><button class="text-button">BUY</button></a>'; // add onclick to got to right page at shop site
 	}
 	id('setList').style.display='none';
 	id('set').style.display='block';
