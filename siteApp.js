@@ -12,7 +12,7 @@ var sets=[{'name':'Bonsall Barns','text':'Six ink A5 line drawings of barns in v
 {'name':'Orkney','text':'Twelve A5 drawings and paintings around Orkney','images':['Kirkwall Street','Stones of Stenness','Marwick','Hoy Sound','Hoxa Head','Brodgar','Waulkmill Bay','Watchstone, Brodgar','Skaill Bay beach','Skaill Bay - Rippled Sand','Ring of Brodgar','Pier Arts Centre, Stromness']},
 {'name':'sheds','text':'Ten 15cm square drawings of everyday farm structures','images':['Alton pig farm','Cherry Orchard Farm barn','Cherry Orchard Farm sheds','fence','Hopton Lane shelter','Lawn Farm barn','Lawn Farm silo','Lawn Farm silos','Sandhall Farm','shepherd hut']}];
 var setIndex;
-var selling=[{'name':'Bonsall Barns','text':'Available in the shop as a set of A5 black-and-white prints on cartridge paper with a map showing the locations of the barns'},
+var selling=[{'name':'Bonsall Barns','text':'Available in the shop as a set of A5 black-and-white prints on cartridge paper with a map showing the locations of the barns - all in a card folder: £20 including UK postage'},
 {'name':'birds','text':'Available in the shop as a set of A5 colour and b&w prints on cartridge paper with a key sheet'}];
 var images=[];
 var image;
@@ -85,20 +85,32 @@ id('action').addEventListener('click',function() {
 	}
 })
 
+// HEADER
+id('headerName').addEventListener('click',function() {
+	console.log('go from '+page+' to profile page');
+	id(page).style.display='none';
+	page='profile';
+	pages.push(page);
+	id(page).style.display='block';
+	id('headerTopic').innerHTML='PROFILE';
+	closeMenu();
+})
+
 // MENU OPTIONS
 id('close').addEventListener('click',closeMenu);
 id('imagesOption').addEventListener('click',function() {
 	console.log('go to images page');
 })
-id('shoppingOption').addEventListener('click',function() {
-	console.log('go from '+page+' to shopping page');
+id('buyOption').addEventListener('click',function() {
+	console.log('go from '+page+' to buy page');
 	id(page).style.display='none';
-	page='shopping';
+	page='buy';
 	pages.push(page);
 	id(page).style.display='block';
-	id('headerTopic').innerHTML='SHOPPING';
+	id('headerTopic').innerHTML='BUY';
 	closeMenu();
 })
+/*
 id('appsOption').addEventListener('click',function() {
 	console.log('go from '+page+' to apps page');
 	id(page).style.display='none';
@@ -108,14 +120,23 @@ id('appsOption').addEventListener('click',function() {
 	id('headerTopic').innerHTML='APPS';
 	closeMenu();
 })
-id('aboutOption').addEventListener('click',function() {
-	console.log('go from '+page+' to shopping page');
+*/
+id('profileOption').addEventListener('click',function() {
+	console.log('go from '+page+' to profile page');
 	id(page).style.display='none';
-	page='about';
+	page='profile';
 	pages.push(page);
 	id(page).style.display='block';
-	id('headerTopic').innerHTML='ABOUT';
+	id('headerTopic').innerHTML='PROFILE';
 	closeMenu();
+})
+id('appsLink').addEventListener('click',function() {
+	console.log('go from '+page+' to apps page');
+	id(page).style.display='none';
+	page='apps';
+	pages.push(page);
+	id(page).style.display='block';
+	id('headerTopic').innerHTML='APPS';
 })
 
 // SWIPE IMAGE
@@ -172,7 +193,9 @@ function showSet() {
 		else n++;
 	}
 	console.log('found: '+found);
-	if(found) id('saleText').innerHTML=selling[n].text;
+	if(found) {
+		id('saleText').innerHTML=selling[n].text+'<br><button class="text-button">BUY</button>'; // add onclick to got to right page at shop site
+	}
 	id('setList').style.display='none';
 	id('set').style.display='block';
 	page='set';
