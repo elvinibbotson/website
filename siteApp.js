@@ -12,7 +12,8 @@ var sets=[{'name':'Bonsall Barns','text':'Six ink A5 line drawings of barns in v
 {'name':'Orkney','text':'Twelve A5 drawings and paintings around Orkney','images':['Kirkwall Street','Stones of Stenness','Marwick','Hoy Sound','Hoxa Head','Brodgar','Waulkmill Bay','Watchstone, Brodgar','Skaill Bay beach','Skaill Bay - Rippled Sand','Ring of Brodgar','Pier Arts Centre, Stromness']},
 {'name':'pastoral','text':'Ten 15cm square drawings of everyday farm structures','images':['Alton pig farm','Cherry Orchard Farm barn','Cherry Orchard Farm sheds','fence','Hopton Lane shelter','Lawn Farm barn','Lawn Farm silo','Lawn Farm silos','Sandhall Farm','shepherd hut']}];
 var setIndex;
-var selling=[{'name':'Bonsall Barns','text':'Available in the shop as a set of A5 prints with a map showing the locations of the barns - all printed on cartridge paper: £15 including UK postage'}];
+var selling=[{'name':'Bonsall Barns','text':'Available in the shop as a set of A5 prints with a map showing the locations of the barns - all printed on cartridge paper: £15 including UK postage'},
+{'name':'pastoral','text':'Available in the shop as a set of 10 prints on cartridge paper 21cm square: £25 including UK postage'}];
 /*,{'name':'birds','text':'Available in the shop as a set of A5 colour and b&w prints on cartridge paper with a key sheet'}];*/
 var images=[];
 var image;
