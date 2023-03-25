@@ -10,10 +10,10 @@ function id(el) {
 var sets=[{'name':'Bonsall Barns','text':'Six ink A5 line drawings of barns in various states of repair around Bonsall in Derbyshire','images':['SK274577','SK273588','SK266572','SK262575','SK241598','SK259579']},
 {'name':'birds','text':'twenty A5 drawings and paintings of British birds','images':['house sparrow','lesser black-backed gull','cormorant','magpie','grey wagtail','greenfinch','hen harrier','black-throated diver','buzzard','avocet','eider','heron','jay','barn owl','swallow','song thrush','razorbill','nuthatch','mallard','marsh tit']},
 {'name':'Orkney','text':'Twelve A5 drawings and paintings around Orkney','images':['Kirkwall Street','Stones of Stenness','Marwick','Hoy Sound','Hoxa Head','Brodgar','Waulkmill Bay','Watchstone, Brodgar','Skaill Bay beach','Skaill Bay - Rippled Sand','Ring of Brodgar','Pier Arts Centre, Stromness']},
-{'name':'sheds','text':'Ten 15cm square drawings of everyday farm structures','images':['Alton pig farm','Cherry Orchard Farm barn','Cherry Orchard Farm sheds','fence','Hopton Lane shelter','Lawn Farm barn','Lawn Farm silo','Lawn Farm silos','Sandhall Farm','shepherd hut']}];
+{'name':'pastoral','text':'Ten 15cm square drawings of everyday farm structures','images':['Alton pig farm','Cherry Orchard Farm barn','Cherry Orchard Farm sheds','fence','Hopton Lane shelter','Lawn Farm barn','Lawn Farm silo','Lawn Farm silos','Sandhall Farm','shepherd hut']}];
 var setIndex;
-var selling=[{'name':'Bonsall Barns','text':'Available in the shop as a set of A5 black-and-white prints on cartridge paper with a map showing the locations of the barns - all in a card folder: £20 including UK postage'},
-{'name':'birds','text':'Available in the shop as a set of A5 colour and b&w prints on cartridge paper with a key sheet'}];
+var selling=[{'name':'Bonsall Barns','text':'Available in the shop as a set of A5 prints with a map showing the locations of the barns - all printed on cartridge paper: £15 including UK postage'}];
+/*,{'name':'birds','text':'Available in the shop as a set of A5 colour and b&w prints on cartridge paper with a key sheet'}];*/
 var images=[];
 var image;
 var page='setList'; // start with list of image sets
@@ -188,6 +188,7 @@ function showSet() {
 	id('setText').innerHTML=sets[setIndex].text;
 	var n=0;
 	found=false;
+	console.log('check '+selling.length+'sale items');
 	while(n<selling.length && !found) {
 		if(selling[n].name==sets[setIndex].name) found=true;
 		else n++;
@@ -199,7 +200,7 @@ function showSet() {
 		var i=0;
 		while(i<name.length) {
 			console.log(name+'['+i+']: '+name.charAt(i));
-			if(name.charAt(i)==' ') name.charAt(i)='-';
+			if(name.charAt(i)==' ') name[i]='-';
 			i++;
 		}
 		console.log('shop page: '+name);
