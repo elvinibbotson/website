@@ -186,6 +186,7 @@ function showSet() {
 	id('caption').innerText=images[image];
 	id('setTitle').innerHTML='<b>'+sets[setIndex].name+'</b>';
 	id('setText').innerHTML=sets[setIndex].text;
+	id('saleText').innerHTML='';
 	var n=0;
 	found=false;
 	console.log('check '+selling.length+'sale items');
