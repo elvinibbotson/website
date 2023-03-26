@@ -199,7 +199,7 @@ function showSet() {
 	if(found) {
 		var name=sets[setIndex].name.replaceAll(' ','-');
 		console.log('shop page: '+name);
-		id('saleText').innerHTML=selling[n].text+'<br><a href="https://elvinibbotson.bigcartel.com/'+name+'"><button class="text-button">BUY</button></a>'; // add onclick to got to right page at shop site
+		id('saleText').innerHTML=selling[n].text+'<br><a href="https://elvinibbotson.bigcartel.com/product/'+name+'"><button class="text-button">BUY</button></a>'; // add onclick to got to right page at shop site
 	}
 	id('setList').style.display='none';
 	id('set').style.display='block';
