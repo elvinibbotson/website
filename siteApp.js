@@ -4,9 +4,6 @@ function id(el) {
 'use strict';
 
 // GLOBAL VARIABLES	
-// var db=null;
-// var list={};
-// var currentListItem=null;
 var sets=[{'name':'Bonsall Barns','text':'Six ink A5 line drawings of barns in various states of repair around Bonsall in Derbyshire','images':['SK274577','SK273588','SK266572','SK262575','SK241598','SK259579']},
 {'name':'birds','text':'twenty A5 drawings and paintings of British birds','images':['house sparrow','lesser black-backed gull','cormorant','magpie','grey wagtail','greenfinch','hen harrier','black-throated diver','buzzard','avocet','eider','heron','jay','barn owl','swallow','song thrush','razorbill','nuthatch','mallard','marsh tit']},
 {'name':'Orkney','text':'Twelve A5 drawings and paintings around Orkney','images':['Kirkwall Street','Stones of Stenness','Marwick','Hoy Sound','Hoxa Head','Brodgar','Waulkmill Bay','Watchstone, Brodgar','Skaill Bay beach','Skaill Bay - Rippled Sand','Ring of Brodgar','Pier Arts Centre, Stromness']},
@@ -20,11 +17,8 @@ var images=[];
 var image;
 var page='setList'; // start with list of image sets
 var pages=['setList'];
-// var currentDialog='messageDialog';
-// var depth=0; // 0 is project list; 1 is element list; 2 is layer laist
 var dragStart=null;
 var swipeStart=null;
-
  
 // DRAG TO NAVIGATE
 id('main').addEventListener('touchstart', function(event) {
@@ -102,6 +96,11 @@ id('headerName').addEventListener('click',function() {
 id('close').addEventListener('click',closeMenu);
 id('imagesOption').addEventListener('click',function() {
 	console.log('go to images page');
+	page='setList';
+	pages=['setList'];
+	id(page).style.display='block';
+	id('headerTopic').innerHTML='IMAGES';
+	closeMenu();
 })
 id('buyOption').addEventListener('click',function() {
 	console.log('go from '+page+' to buy page');
@@ -112,17 +111,6 @@ id('buyOption').addEventListener('click',function() {
 	id('headerTopic').innerHTML='BUY';
 	closeMenu();
 })
-/*
-id('appsOption').addEventListener('click',function() {
-	console.log('go from '+page+' to apps page');
-	id(page).style.display='none';
-	page='apps';
-	pages.push(page);
-	id(page).style.display='block';
-	id('headerTopic').innerHTML='APPS';
-	closeMenu();
-})
-*/
 id('profileOption').addEventListener('click',function() {
 	console.log('go from '+page+' to profile page');
 	id(page).style.display='none';
@@ -156,18 +144,29 @@ id('setImage').addEventListener('touchend',function(event) {
 
 // LIST SETS
 function listSets() {
+	images=[];
 	for(var i in sets) {
-		console.log('set '+i+': '+sets[i].name+'; images...');
-		for(var j in sets[i].images) console.log(sets[i].images[j]);
 		var listItem = document.createElement('li');
 		listItem.classList.add('set');
 		listItem.index=i;
 		listItem.addEventListener('click', function(){setIndex=this.index; showSet();});
-		image=document.createElement('img');
-		image.classList.add('set-image');
-		image.src='images/'+sets[i].name+'/'+sets[i].images[0]+'.JPG';
-		console.log('set image: '+image.src);
-		listItem.appendChild(image);
+		images[i]=document.createElement('img');
+		images[i].classList.add('set-image');
+		images[i].src='images/'+sets[i].name+'/'+sets[i].images[0]+'.JPG';
+		images[i].onload=function(){
+			var w=this.naturalWidth;
+			var h=this.naturalHeight;
+			if(w>0 && h>0) {
+				var change=false;
+				console.log('IMAGE SIZE: '+w+'x'+h+' SCREEN: '+screen.width+'x'+screen.height);
+				if(h>screen.height) {w*=0.8*screen.height/h;change=true;console.log('reduce height');}
+				if(w<screen.width) {change=true;console.log('reduce width');}
+				else if(w>screen.width) {w=screen.width*0.9; change=true;console.log('reduce width');}
+				if(change) this.style.width=w+'px';
+			}
+		};
+		console.log('set image: '+images[i].src);
+		listItem.appendChild(images[i]);
 		var caption=document.createElement('div');
 		caption.classList.add('img-text');
 		caption.innerText=' '+sets[i].name+' ';
@@ -175,7 +174,6 @@ function listSets() {
 		id('setList').appendChild(listItem);
 	}
 	page='setList';
-	// id('action').innerHTML='<img src="menu.svg"/>';
 	id('action').style.background='url(menu.svg) center center no-repeat';
 }
 
@@ -185,6 +183,18 @@ function showSet() {
 	images=sets[setIndex].images;
 	image=0;
 	id('image').src='images/'+sets[setIndex].name+'/'+images[image]+'.JPG';
+	id('image').onload=function(){
+			var w=this.naturalWidth;
+			var h=this.naturalHeight;
+			if(w>0 && h>0) {
+				var change=false;
+				console.log('IMAGE SIZE: '+w+'x'+h+' SCREEN: '+screen.width+'x'+screen.height);
+				if(h>screen.height) {w*=0.8*screen.height/h;change=true;console.log('reduce height');}
+				if(w<screen.width) {change=true;console.log('reduce width');}
+				else if(w>screen.width) {w=screen.width*0.9; change=true;console.log('reduce width');}
+				if(change) this.style.width=w+'px';
+			}
+		};
 	id('caption').innerText=images[image];
 	id('setTitle').innerHTML='<b>'+sets[setIndex].name+'</b>';
 	id('setText').innerHTML=sets[setIndex].text;
@@ -297,61 +307,9 @@ function trim(text,len) {
 }
 
 // START-UP CODE
-// lastSave=window.localStorage.getItem('lastSave');
-// console.log("last save: "+lastSave);
-// load items from database
-// var request=window.indexedDB.open("siteDB",2);
-/* request.onsuccess=function (event) {
-	db=event.target.result;
-	console.log("DB open");
-	// display('HI THERE');
-	sets=shuffle(sets); // at start, shuffle order of sets and of images in each set
-	for(var i in sets) sets[i].images=shuffle(sets[i].images); 
-	console.log('shuffled first set: '+sets[0].name+'; first image: '+sets[0].images[0]);
-	listSets();
-};
 
-var w=id('menu').offsetWidth;
-id('menu').style.left=(-1*w)+'px';
-*/
 sets=shuffle(sets); // at start, shuffle order of sets and of images in each set
 for(var i in sets) sets[i].images=shuffle(sets[i].images); 
 console.log('shuffled first set: '+sets[0].name+'; first image: '+sets[0].images[0]);
 listSets();
-/*
-request.onupgradeneeded=function(event) {
-	db=event.currentTarget.result;
-	// SET UP OBJECT STORES
-	if(!db.objectStoreNames.contains('projects')) {
-		dbObjectStore=event.currentTarget.result.createObjectStore("projects",{
-			keyPath:'id',autoIncrement: true});
-			console.log("projects store created");
-	}
-	else console.log("projects store exists");
-	if(!db.objectStoreNames.contains('elements')) {
-		dbObjectStore=event.currentTarget.result.createObjectStore("elements",{
-		keyPath:'id',autoIncrement: true});
-		console.log("elements store created");
-	}
-	else console.log("elements store exists");
-	if(!db.objectStoreNames.contains('materials')) {
-		dbObjectStore=event.currentTarget.result.createObjectStore("materials",{
-		keyPath:'id',autoIncrement: true});
-		console.log("materials store created");
-}
-request.onerror=function(event) {
-	display("indexedDB error code "+event.target.errorCode);
-};
-*/	
-/* implement service worker if browser is PWA friendly
-if (navigator.serviceWorker.controller) {
-	console.log('Active service worker found, no need to register')
-} else { //Register the ServiceWorker
-	navigator.serviceWorker.register('siteSW.js', {
-		scope: '/site/'
-	}).then(function(reg) {
-		console.log('Service worker has been registered for scope:'+ reg.scope);
-	});
-}
-*/
 
