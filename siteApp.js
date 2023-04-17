@@ -11,7 +11,8 @@ var sets=[{'name':'Bonsall Barns','text':'Six ink A5 line drawings of barns in v
 {'name':'Wirksworth','text':'Ten A4 drawings of less-usual views around Wirksworth','images':['Blind Lane','Bowling Green Lane','Brooklands from Hannage Brook','Coldwell Street','Our Lady Church','Red Lion','St Marys and Blind Lane','The Causeway','The Dale meets Greenhill','Town Hall from Bowling Green Lane']}];
 var setIndex;
 var selling=[{'name':'Bonsall Barns','text':'Available in the shop as a set of A5 prints with a map showing the locations of the barns - all printed on cartridge paper: £15 including UK postage'},
-{'name':'pastoral','text':'Available in the shop as a set of 10 prints on cartridge paper 21cm square: £25 including UK postage'}];
+{'name':'pastoral','text':'Available in the shop as a set of 10 prints on cartridge paper 21cm square: £25 including UK postage'},
+{'name':'Wirksworth','text':'Available in the shop as a set of A4 prints with a key map - all printed on cartridge paper: £25 including UK postage'}];
 /*,{'name':'birds','text':'Available in the shop as a set of A5 colour and b&w prints on cartridge paper with a key sheet'}];*/
 var images=[];
 var image;
@@ -40,32 +41,12 @@ id('main').addEventListener('touchend', function(event) {
     	id(page).style.display='block';
     	setHeader();
     }
-    else if(drag>50) { // drag left to close dialogs
-    	console.log('FORWARDS');
-    	p=pages[pages.length-1];
-    	id(p).style.display='none';
-    	switch(p) {
-    		case 'setList':
-    		case 'set':
-    			page='shopping';
-    			break;
-    		case 'shopping':
-    			page='apps';
-    			break;
-    		case 'apps':
-    			page='jottings';
-    			break;
-    		case 'jottings':
-    			page='about';
-    	}
-    	pages.push(page);
-    	id(page).style.display='block';
-    	setHeader();
-    }
 })
 
 // ACTION BUTTON
 id('action').addEventListener('click',function() {
+	console.log('page '+page);
+	/*
 	if(page=='set') {
 		console.log('BACK TO LIST');
 		id('set').style.display='none';
@@ -79,6 +60,22 @@ id('action').addEventListener('click',function() {
 		console.log('MENU');
 		id('menu').style.display='block';
 	}
+	*/
+	if(page=='setList') {
+		console.log('MENU');
+		id('menu').style.display='block';
+	}
+	else {
+		console.log('BACK from '+pages[pages.length-1]+' to '+pages[pages.length-2]);
+        p=pages.pop();
+		console.log('hide '+p);
+    	id(p).style.display='none';
+    	page=pages[pages.length-1];
+    	console.log('show '+page);
+    	if(page=='setList') listSets();
+    	id(page).style.display='block';
+    	setHeader();
+	}
 })
 
 // HEADER
@@ -89,6 +86,7 @@ id('headerName').addEventListener('click',function() {
 	pages.push(page);
 	id(page).style.display='block';
 	id('headerTopic').innerHTML='PROFILE';
+	id('action').style.background='url(back.svg) center center no-repeat';
 	closeMenu();
 })
 
@@ -100,8 +98,9 @@ id('imagesOption').addEventListener('click',function() {
 	pages=['setList'];
 	id(page).style.display='block';
 	id('headerTopic').innerHTML='IMAGES';
+	id('action').style.background='url(menu.svg) center center no-repeat';
 	closeMenu();
-})
+});
 id('buyOption').addEventListener('click',function() {
 	console.log('go from '+page+' to buy page');
 	id(page).style.display='none';
@@ -109,8 +108,9 @@ id('buyOption').addEventListener('click',function() {
 	pages.push(page);
 	id(page).style.display='block';
 	id('headerTopic').innerHTML='BUY';
+	id('action').style.background='url(back.svg) center center no-repeat';
 	closeMenu();
-})
+});
 id('profileOption').addEventListener('click',function() {
 	console.log('go from '+page+' to profile page');
 	id(page).style.display='none';
@@ -118,8 +118,9 @@ id('profileOption').addEventListener('click',function() {
 	pages.push(page);
 	id(page).style.display='block';
 	id('headerTopic').innerHTML='PROFILE';
+	id('action').style.background='url(back.svg) center center no-repeat';
 	closeMenu();
-})
+});
 id('appsLink').addEventListener('click',function() {
 	console.log('go from '+page+' to apps page');
 	id(page).style.display='none';
@@ -127,6 +128,8 @@ id('appsLink').addEventListener('click',function() {
 	pages.push(page);
 	id(page).style.display='block';
 	id('headerTopic').innerHTML='APPS';
+	id('action').style.background='url(back.svg) center center no-repeat';
+	closeMenu();
 })
 
 // SWIPE IMAGE
@@ -180,21 +183,24 @@ function listSets() {
 // SHOW CURRENT SET
 function showSet() {
 	console.log('SHOW SET '+setIndex);
+	id('wait').style.display='block';
 	images=sets[setIndex].images;
 	image=0;
 	id('image').src='images/'+sets[setIndex].name+'/'+images[image]+'.JPG';
 	id('image').onload=function(){
-			var w=this.naturalWidth;
-			var h=this.naturalHeight;
-			if(w>0 && h>0) {
-				var change=false;
-				console.log('IMAGE SIZE: '+w+'x'+h+' SCREEN: '+screen.width+'x'+screen.height);
-				if(h>screen.height) {w*=0.8*screen.height/h;change=true;console.log('reduce height');}
-				if(w<screen.width) {change=true;console.log('reduce width');}
-				else if(w>screen.width) {w=screen.width*0.9; change=true;console.log('reduce width');}
-				if(change) this.style.width=w+'px';
-			}
-		};
+		var w=this.naturalWidth;
+		var h=this.naturalHeight;
+		if(w>0 && h>0) {
+			var change=false;
+			console.log('IMAGE SIZE: '+w+'x'+h+' SCREEN: '+screen.width+'x'+screen.height);
+			if(h>screen.height) {w*=0.8*screen.height/h;change=true;console.log('reduce height');}
+			if(w<screen.width) {change=true;console.log('reduce width');}
+			else if(w>screen.width) {w=screen.width*0.9; change=true;console.log('reduce width');}
+			if(change) this.style.width=w+'px';
+		}
+		id('caption').innerText=images[image];
+		id('wait').style.display='none';
+	};
 	id('caption').innerText=images[image];
 	id('setTitle').innerHTML='<b>'+sets[setIndex].name+'</b>';
 	id('setText').innerHTML=sets[setIndex].text;
@@ -262,30 +268,63 @@ function shuffle(array) {
 
 function previous() {
 	console.log('PREVIOUS IMAGE');
+	id('wait').style.display='block';
 	image--; // previous image
 	if(image<0) image=images.length-1; // loop back to last images
 	id('image').src='images/'+sets[setIndex].name+'/'+images[image]+'.JPG';
-	id('caption').innerText=images[image];
+	id('image').onload=function(){
+		var w=this.naturalWidth;
+		var h=this.naturalHeight;
+		if(w>0 && h>0) {
+			var change=false;
+			console.log('IMAGE SIZE: '+w+'x'+h+' SCREEN: '+screen.width+'x'+screen.height);
+			if(h>screen.height) {w*=0.8*screen.height/h;change=true;console.log('reduce height');}
+			if(w<screen.width) {change=true;console.log('reduce width');}
+			else if(w>screen.width) {w=screen.width*0.9; change=true;console.log('reduce width');}
+			if(change) this.style.width=w+'px';
+		}
+		id('caption').innerText=images[image];
+		id('wait').style.display='none';
+	};
 }
 
 function next() {
 	console.log('NEXT IMAGE');
+	id('wait').style.display='block';
 	image++; // previous image
 	if(image==images.length) image=0; // loop back to first image
 	id('image').src='images/'+sets[setIndex].name+'/'+images[image]+'.JPG';
-	id('caption').innerText=images[image];
+	id('image').onload=function(){
+		var w=this.naturalWidth;
+		var h=this.naturalHeight;
+		if(w>0 && h>0) {
+			var change=false;
+			console.log('IMAGE SIZE: '+w+'x'+h+' SCREEN: '+screen.width+'x'+screen.height);
+			if(h>screen.height) {w*=0.8*screen.height/h;change=true;console.log('reduce height');}
+			if(w<screen.width) {change=true;console.log('reduce width');}
+			else if(w>screen.width) {w=screen.width*0.9; change=true;console.log('reduce width');}
+			if(change) this.style.width=w+'px';
+		}
+		id('caption').innerText=images[image];
+		id('wait').style.display='none';
+	};
 }
 
 function setHeader() {
 	console.log('set header for page '+page);
 	var title;
+	id('action').style.background='url(back.svg) center center no-repeat';
 	switch(page) {
 		case 'setList':
+			id('action').style.background='url(menu.svg) center center no-repeat';
 		case 'set':
 			title='IMAGES';
 			break;
-		case 'shopping':
-			title='SHOPPING';
+		case 'buy':
+			title='BUY';
+			break;
+		case 'profile':
+			title='PROFILE';
 			break;
 		case 'apps':
 			title='APPS';
@@ -293,7 +332,7 @@ function setHeader() {
 		// etc
 	}
 	id('headerTopic').innerText=title;
-	id('action').style.background='url(menu.svg) center center no-repeat';
+	// id('action').style.background='url(menu.svg) center center no-repeat';
 }
 
 function closeMenu() {

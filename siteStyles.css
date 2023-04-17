@@ -194,6 +194,19 @@ a {
 	background: url(next.svg) center center no-repeat;
 }
 
+#wait {
+	position: absolute;
+	left: 45%;
+	top: 45%;
+	width: 32px;
+	height: 32px;
+	border: white solid 5px;
+	border-radius: 50%;
+	background: white;
+	display: none;
+	z-index: 10;
+}
+
 #setTitle, #setText,#saleText {
 	padding: 10px;
 	color: #666;
