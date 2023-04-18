@@ -187,7 +187,7 @@ function showSet() {
 	images=sets[setIndex].images;
 	image=0;
 	id('image').src='images/'+sets[setIndex].name+'/'+images[image]+'.JPG';
-	id('image').onload=function(){
+	/* id('image').onload=function(){
 		var w=this.naturalWidth;
 		var h=this.naturalHeight;
 		if(w>0 && h>0) {
@@ -200,7 +200,7 @@ function showSet() {
 		}
 		id('caption').innerText=images[image];
 		id('wait').style.display='none';
-	};
+	}; */
 	id('caption').innerText=images[image];
 	id('setTitle').innerHTML='<b>'+sets[setIndex].name+'</b>';
 	id('setText').innerHTML=sets[setIndex].text;
@@ -224,6 +224,7 @@ function showSet() {
 	pages.push(page);
 	console.log(pages.length+' pages');
 	id('action').style.background='url(back.svg) center center no-repeat';
+	next();
 }
 
 // STEP THROUGH SET IMAGES
