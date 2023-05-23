@@ -8,12 +8,13 @@ var sets=[{'name':'Bonsall Barns','text':'Six ink A5 line drawings of barns in v
 {'name':'birds','text':'twenty A5 drawings and paintings of British birds','images':['house sparrow','lesser black-backed gull','cormorant','magpie','grey wagtail','greenfinch','hen harrier','black-throated diver','buzzard','avocet','eider','heron','jay','barn owl','swallow','song thrush','razorbill','nuthatch','mallard','marsh tit']},
 {'name':'Orkney','text':'Twelve A5 drawings and paintings around Orkney','images':['Kirkwall Street','Stones of Stenness','Marwick','Hoy Sound','Hoxa Head','Brodgar','Waulkmill Bay','Watchstone, Brodgar','Skaill Bay beach','Skaill Bay - Rippled Sand','Ring of Brodgar','Pier Arts Centre, Stromness']},
 {'name':'pastoral','text':'Ten 21cm square drawings of everyday farm structures','images':['Alton pig farm','Cherry Orchard Farm barn','Cherry Orchard Farm sheds','fence','Hopton Lane shelter','Lawn Farm barn','Lawn Farm silo','Lawn Farm silos','Sandhall Farm','shepherd hut']},
-{'name':'Wirksworth','text':'Ten A4 drawings of less-usual views around Wirksworth','images':['Blind Lane','Bowling Green Lane','Brooklands from Hannage Brook','Coldwell Street','Our Lady Church','Red Lion','St Marys and Blind Lane','The Causeway','The Dale meets Greenhill','Town Hall from Bowling Green Lane']}];
+{'name':'Offbeat Wirksworth','text':'Ten A4 drawings of less-usual views around Wirksworth','images':['Blind Lane','Bowling Green Lane','Brooklands from Hannage Brook','Coldwell Street','Our Lady Church','Red Lion','St Marys and Blind Lane','The Causeway','The Dale meets Greenhill','Town Hall from Bowling Green Lane']}];
 var setIndex;
 var selling=[{'name':'Bonsall Barns','text':'Available in the shop as a set of A5 prints with a map showing the locations of the barns - all printed on cartridge paper: £15 including UK postage'},
 {'name':'pastoral','text':'Available in the shop as a set of 10 prints on cartridge paper 21cm square: £25 including UK postage'},
-{'name':'Wirksworth','text':'Available in the shop as a set of A4 prints with a key map - all printed on cartridge paper: £25 including UK postage'}];
+{'name':'Offbeat Wirksworth','text':'Available in the shop as a set of A4 prints with a key map - all printed on cartridge paper: £25 including UK postage'}];
 /*,{'name':'birds','text':'Available in the shop as a set of A5 colour and b&w prints on cartridge paper with a key sheet'}];*/
+var books=[{'name':'Offbeat Wirksworth','url':'https://www.lulu.com/shop/elvin-ibbotson/offbeat-wirksworth/paperback/product-rndwn5.html'}]
 var images=[];
 var image;
 var page='setList'; // start with list of image sets
@@ -207,16 +208,28 @@ function showSet() {
 	id('saleText').innerHTML='';
 	var n=0;
 	found=false;
-	console.log('check '+selling.length+'sale items');
+	console.log('check '+selling.length+' sale items');
 	while(n<selling.length && !found) {
 		if(selling[n].name==sets[setIndex].name) found=true;
 		else n++;
 	}
-	console.log('found: '+found);
+	console.log('selling found: '+found);
 	if(found) {
 		var name=sets[setIndex].name.replaceAll(' ','-');
 		console.log('shop page: '+name);
 		id('saleText').innerHTML=selling[n].text+'<br><a href="https://elvinibbotson.bigcartel.com/product/'+name+'"><button class="text-button">BUY</button></a>'; // add onclick to got to right page at shop site
+	}
+	n=0;
+	found=false;
+	console.log('check '+books.length+' books');
+	while(n<books.length && !found) {
+		console.log('set name: '+sets[setIndex].name+'; books['+n+']: '+books[n].name);
+		if(books[n].name==sets[setIndex].name) found=true;
+		else n++;
+	}
+	console.log('book found: '+found);
+	if(found) {
+		id('saleText').innerHTML+='<br>available as a book from <a href="'+books[n].url+'"><b>the Lulu bookstore</b></a>';
 	}
 	id('setList').style.display='none';
 	id('set').style.display='block';
