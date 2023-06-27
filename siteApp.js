@@ -13,6 +13,7 @@ var sets=[{'name':'Bonsall Barns','text':'Six ink A5 line drawings of barns in v
 var setIndex;
 var selling=[{'name':'Bonsall Barns','text':'Available in the shop as a set of A5 prints with a map showing the locations of the barns - all printed on cartridge paper: £15 including UK postage'},
 {'name':'pastoral','text':'Available in the shop as a set of 10 prints on cartridge paper 21cm square: £25 including UK postage'},
+{'name':'Offbeat Belper','text':'Available in the shop as a set of A4 prints with a key map - all printed on cartridge paper: £25 including UK postage'},
 {'name':'Offbeat Wirksworth','text':'Available in the shop as a set of A4 prints with a key map - all printed on cartridge paper: £25 including UK postage'}];
 /*,{'name':'birds','text':'Available in the shop as a set of A5 colour and b&w prints on cartridge paper with a key sheet'}];*/
 var books=[{'name':'Offbeat Wirksworth','url':'https://www.lulu.com/shop/elvin-ibbotson/offbeat-wirksworth/paperback/product-rndwn5.html'}]
