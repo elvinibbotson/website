@@ -11,10 +11,10 @@ var sets=[{'name':'Bonsall Barns','text':'Six ink A5 line drawings of barns in v
 {'name':'Offbeat Wirksworth','text':'Ten A4 drawings of less-usual views around Wirksworth','images':['Blind Lane','Bowling Green Lane','Brooklands from Hannage Brook','Coldwell Street','Our Lady Church','Red Lion','St Marys and Blind Lane','The Causeway','The Dale meets Greenhill','Town Hall from Bowling Green Lane']},
 {'name':'Offbeat Belper','text':'Ten A4 drawings of less-usual views around Belper','images':['Bridge Street','East Mill','Courtaulds Mill','Short Row','Lodge Drive','Belper Lane','Babington Hospital','Ada Belfield Centre','28a','River Gardens Cafe']}];
 var setIndex;
-var selling=[{'name':'Bonsall Barns','text':'Available in the shop as a set of A5 prints with a map showing the locations of the barns - all printed on cartridge paper: £15 including UK postage'},
-{'name':'pastoral','text':'Available in the shop as a set of 10 prints on cartridge paper 21cm square: £25 including UK postage'},
-{'name':'Offbeat Belper','text':'Available in the shop as a set of A4 prints with a key map - all printed on cartridge paper: £25 including UK postage'},
-{'name':'Offbeat Wirksworth','text':'Available in the shop as a set of A4 prints with a key map - all printed on cartridge paper: £25 including UK postage'}];
+var selling=[{'name':'Bonsall Barns','text':'Available in the shop as individual A5 prints or the set of 6 with a map showing the locations of the barns'},
+{'name':'pastoral','text':'Available in the shop as individual 21cm square prints or the set of 10'},
+{'name':'Offbeat Belper','text':'Available in the shop as individual A4 prints or the set of 10 with a key map'},
+{'name':'Offbeat Wirksworth','text':'Available in the shop as individual A4 prints or the set of 10 with a key map'}];
 /*,{'name':'birds','text':'Available in the shop as a set of A5 colour and b&w prints on cartridge paper with a key sheet'}];*/
 var books=[{'name':'Offbeat Wirksworth','url':'https://www.lulu.com/shop/elvin-ibbotson/offbeat-wirksworth/paperback/product-rndwn5.html'}]
 var images=[];
