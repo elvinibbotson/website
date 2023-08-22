@@ -160,8 +160,8 @@ function listSets() {
 		listItem.addEventListener('click', function(){setIndex=this.index; showSet();});
 		images[i]=document.createElement('img');
 		images[i].classList.add('set-image');
-		images[i].src='images/'+sets[i].name+'/slideshow.gif'; // show slideshow GIFs or...
-		// ...just first of randomly-sorted images: images[i].src='images/'+sets[i].name+'/'+sets[i].images[0]+'.JPG';
+		// images[i].src='images/'+sets[i].name+'/slideshow.gif'; // show slideshow GIFs or just first image...
+		images[i].src='images/'+sets[i].name+'/'+sets[i].images[0]+'.JPG';
 		images[i].onload=function(){
 			var w=this.naturalWidth;
 			var h=this.naturalHeight;
