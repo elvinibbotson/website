@@ -12,7 +12,8 @@ var sets=[{'name':'A4','text':'Fifteen A4 monochrome drawings - various subjects
 {'name':'Offbeat Wirksworth','text':'Ten A4 drawings of less-usual views around Wirksworth','images':['Blind Lane','Bowling Green Lane','Brooklands from Hannage Brook','Coldwell Street','Our Lady Church','Red Lion','St Marys and Blind Lane','The Causeway','The Dale meets Greenhill','Town Hall from Bowling Green Lane']},
 {'name':'Offbeat Belper','text':'Ten A4 drawings of less-usual views around Belper','images':['Bridge Street','East Mill','Courtaulds Mill','Short Row','Lodge Drive','Belper Lane','Babington Hospital','Ada Belfield Centre','28a','River Gardens Cafe']}];
 var setIndex;
-var selling=[{'name':'birds','text':'Available in the shop as individual A5 prints or the set of 20'},
+var selling=[{'name':'A4','text':'Available in shop as individual A4 prints or the set of 15'},
+// {'name':'birds','text':'Available in the shop as individual A5 prints or the set of 20'},
 {'name':'Bonsall Barns','text':'Available in the shop as a set of 6 with a map showing the locations of the barns'},
 {'name':'pastoral','text':'Available in the shop as individual 21cm square prints or the set of 10'},
 {'name':'Offbeat Belper','text':'Available in the shop as individual A4 prints, the set of 10 with a key map or a set of 4 postcards'},
