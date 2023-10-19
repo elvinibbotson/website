@@ -189,7 +189,7 @@ function showSet() {
 		else n++
 	}
 	if(found) id('saleText').innerHTML=selling[n].text;
-	if(books.includes(sets[setIndex].name)) id('saleText').innerHTML+='<p>Available as a booklet in print or as a free ebook at the <b><a href="http://lulu.com">Lulu bookstore</a></b>. Search for Elvin Ibbotson.';
+	if(books.includes(sets[setIndex].name)) id('saleText').innerHTML+='<p>Available as a booklet in print or as a free ebook at the <b><a href="https://www.lulu.com/spotlight/elvin-ibbotson">Lulu bookstore</a></b>.';
 	id('setList').style.display='none';
 	id('set').style.display='block';
 	page='set';
