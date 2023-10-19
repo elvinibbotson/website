@@ -18,8 +18,7 @@ var selling=[{'name':'A4','text':'Available in shop as individual A4 prints or t
 {'name':'pastoral','text':'Available in the shop as individual 21cm square prints or the set of 10'},
 {'name':'Offbeat Belper','text':'Available in the shop as individual A4 prints, the set of 10 with a key map or a set of 4 postcards'},
 {'name':'Offbeat Wirksworth','text':'Available in the shop as individual A4 prints, the set of 10 with a key map or a set of 4 postcards'}];
-var books=[{'name':'Offbeat Belper','url':'https://www.lulu.com/shop/elvin-ibbotson/offbeat-belper/paperback/product-mj4dwp.html'},
-{'name':'Offbeat Wirksworth','url':'https://www.lulu.com/shop/elvin-ibbotson/offbeat-wirksworth/paperback/product-rndwn5.html'}]
+var books=['Offbeat Belper','Offbeat Wirksworth'];
 var images=[];
 var image;
 var page='setList'; // start with list of image sets
@@ -52,21 +51,6 @@ id('main').addEventListener('touchend', function(event) {
 // ACTION BUTTON
 id('action').addEventListener('click',function() {
 	console.log('page '+page);
-	/*
-	if(page=='set') {
-		console.log('BACK TO LIST');
-		id('set').style.display='none';
-		id('setList').style.display='block';
-		page='setList';
-		pages.pop();
-		console.log(pages.length+' pages');
-		id('action').style.background='url(menu.svg) center center no-repeat';
-	}
-	else {
-		console.log('MENU');
-		id('menu').style.display='block';
-	}
-	*/
 	if(page=='setList') {
 		console.log('MENU');
 		id('menu').style.display='block';
@@ -194,49 +178,12 @@ function showSet() {
 	images=sets[setIndex].images;
 	image=0;
 	id('image').src='images/'+sets[setIndex].name+'/'+images[image]+'.JPG';
-	/* id('image').onload=function(){
-		var w=this.naturalWidth;
-		var h=this.naturalHeight;
-		if(w>0 && h>0) {
-			var change=false;
-			console.log('IMAGE SIZE: '+w+'x'+h+' SCREEN: '+screen.width+'x'+screen.height);
-			if(h>screen.height) {w*=0.8*screen.height/h;change=true;console.log('reduce height');}
-			if(w<screen.width) {change=true;console.log('reduce width');}
-			else if(w>screen.width) {w=screen.width*0.9; change=true;console.log('reduce width');}
-			if(change) this.style.width=w+'px';
-		}
-		id('caption').innerText=images[image];
-		id('wait').style.display='none';
-	}; */
 	id('caption').innerText=images[image];
 	id('setTitle').innerHTML='<b>'+sets[setIndex].name+'</b>';
 	id('setText').innerHTML=sets[setIndex].text;
 	id('saleText').innerHTML='';
 	var n=0;
-	found=false;
-	console.log('check '+selling.length+' sale items');
-	while(n<selling.length && !found) {
-		if(selling[n].name==sets[setIndex].name) found=true;
-		else n++;
-	}
-	console.log('selling found: '+found);
-	if(found) {
-		var name=sets[setIndex].name.replaceAll(' ','-');
-		console.log('shop page: '+name);
-		id('saleText').innerHTML=selling[n].text+'<br><a href="https://elvinibbotson.bigcartel.com/product/'+name+'"><button class="text-button">BUY</button></a>'; // add onclick to got to right page at shop site
-	}
-	n=0;
-	found=false;
-	console.log('check '+books.length+' books');
-	while(n<books.length && !found) {
-		console.log('set name: '+sets[setIndex].name+'; books['+n+']: '+books[n].name);
-		if(books[n].name==sets[setIndex].name) found=true;
-		else n++;
-	}
-	console.log('book found: '+found);
-	if(found) {
-		id('saleText').innerHTML+='<br>available as a book from <a href="'+books[n].url+'"><b>the Lulu bookstore</b></a>';
-	}
+	if(books.includes(sets[setIndex].name)) id('saleText').innerHTML+='<br>available as a booklet in print or as a free ebook at the <b><a href="http://lulu.com">Lulu bookstore</a></b>. Search for Elvin Ibbotson.';
 	id('setList').style.display='none';
 	id('set').style.display='block';
 	page='set';
