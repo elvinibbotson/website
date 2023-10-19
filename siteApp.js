@@ -183,7 +183,13 @@ function showSet() {
 	id('setText').innerHTML=sets[setIndex].text;
 	id('saleText').innerHTML='';
 	var n=0;
-	if(books.includes(sets[setIndex].name)) id('saleText').innerHTML+='<br>available as a booklet in print or as a free ebook at the <b><a href="http://lulu.com">Lulu bookstore</a></b>. Search for Elvin Ibbotson.';
+	var found=false;
+	while(n<selling.length && !found) {
+		if(selling[n].name==sets[setIndex].name) found=true;
+		else n++
+	}
+	if(found) id('saleText').innerHTML=selling[n].text;
+	if(books.includes(sets[setIndex].name)) id('saleText').innerHTML+='<p>Available as a booklet in print or as a free ebook at the <b><a href="http://lulu.com">Lulu bookstore</a></b>. Search for Elvin Ibbotson.';
 	id('setList').style.display='none';
 	id('set').style.display='block';
 	page='set';
