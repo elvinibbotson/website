@@ -92,6 +92,12 @@ a {
     width: 70%;
 }
 
+.libraryTab {
+	position: absolute;
+	left: 100px;
+	width: 60%;
+}
+
 .text-button {
 	border: none;
 	border-radius: 5px;
@@ -150,7 +156,7 @@ a {
     background: white;
 }
 
-#set, #buy, #apps, #profile {
+#set, #buy, #library, #apps, #profile {
 	margin-top: 40px;
 	padding: 10px;
 	display: none;

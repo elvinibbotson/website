@@ -101,6 +101,16 @@ id('buyOption').addEventListener('click',function() {
 	id('action').style.background='url(back.svg) center center no-repeat';
 	closeMenu();
 });
+id('libraryOption').addEventListener('click',function() {
+	console.log('go to lulu library');
+	id(page).style.display='none';
+	page='library';
+	pages.push(page);
+	id(page).style.display='block';
+	id('headerTopic').innerHTML='LIBRARY';
+	id('action').style.background='url(back.svg) center center no-repeat';
+	closeMenu();
+})
 id('profileOption').addEventListener('click',function() {
 	console.log('go from '+page+' to profile page');
 	id(page).style.display='none';
@@ -291,10 +301,13 @@ function setHeader() {
 		case 'setList':
 			id('action').style.background='url(menu.svg) center center no-repeat';
 		case 'set':
-			title='IMAGES';
+			title='GALLERY';
 			break;
 		case 'buy':
 			title='BUY';
+			break;
+		case 'library':
+			title='LIBRARY';
 			break;
 		case 'profile':
 			title='PROFILE';
