@@ -82,12 +82,12 @@ id('headerName').addEventListener('click',function() {
 
 // MENU OPTIONS
 id('close').addEventListener('click',closeMenu);
-id('imagesOption').addEventListener('click',function() {
-	console.log('go to images page');
+id('galleryOption').addEventListener('click',function() {
+	console.log('go to gallery page');
 	page='setList';
 	pages=['setList'];
 	id(page).style.display='block';
-	id('headerTopic').innerHTML='IMAGES';
+	id('headerTopic').innerHTML='GALLERY';
 	id('action').style.background='url(menu.svg) center center no-repeat';
 	closeMenu();
 });
@@ -155,7 +155,6 @@ function listSets() {
 		listItem.addEventListener('click', function(){setIndex=this.index; showSet();});
 		images[i]=document.createElement('img');
 		images[i].classList.add('set-image');
-		// images[i].src='images/'+sets[i].name+'/slideshow.gif'; // show slideshow GIFs or just first image...
 		images[i].src='images/'+sets[i].name+'/'+sets[i].images[0]+'.JPG';
 		images[i].onload=function(){
 			var w=this.naturalWidth;
@@ -187,7 +186,7 @@ function showSet() {
 	id('wait').style.display='block';
 	images=sets[setIndex].images;
 	image=0;
-	id('image').src='images/'+sets[setIndex].name+'/'+images[image]+'.JPG';
+	id('image').src='imges/'+sets[setIndex].name+'/'+images[image]+'.JPG';
 	id('caption').innerText=images[image];
 	id('setTitle').innerHTML='<b>'+sets[setIndex].name+'</b>';
 	id('setText').innerHTML=sets[setIndex].text;
