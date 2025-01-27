@@ -111,6 +111,16 @@ id('libraryOption').addEventListener('click',function() {
 	id('headerTopic').innerHTML='LIBRARY';
 	id('action').style.background='url(back.svg) center center no-repeat';
 	closeMenu();
+});
+id('appsOption').addEventListener('click',function() {
+	console.log('go to apps page');
+	id(page).style.display='none';
+	page='apps';
+	pages.push(page);
+	id(page).style.display='block';
+	id('headerTopic').innerHTML='APPS';
+	id('action').style.background='url(back.svg) center center no-repeat';
+	closeMenu();
 })
 id('profileOption').addEventListener('click',function() {
 	console.log('go from '+page+' to profile page');
