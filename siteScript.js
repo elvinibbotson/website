@@ -251,6 +251,7 @@ function openBook() {
 	// console.log('OPEN BOOK '+libraryIndex);
 	var url='library/'+library[libraryIndex].name+'.pdf';
 	// console.log('URL: '+url);
+	/* CODE TO VIEW IN WEBSITE
 	id('view').type='application/pdf';
 	id('view').data=url;
 	id('view').height=sh+'px';
@@ -259,6 +260,9 @@ function openBook() {
 	id('viewer').style.display='block';
 	page='viewer';
 	pages.push(page);
+	*/
+	// CODE TO OPEN IN NEW TAB...
+	window.location.href=url;
 }
 
 function listApps() {
@@ -303,6 +307,7 @@ function openApp() {
 	// console.log('OPEN APP '+codeIndex);
 	var url='https://elvinibbotson.github.io/'+apps[codeIndex].name+'/';
 	// console.log('URL: '+url);
+	/* CODE TO OPEN IN WEBSITE...
 	id('view').type='text/html';
 	id('view').data=url;
 	id('view').height=sh+'px';
@@ -311,6 +316,9 @@ function openApp() {
 	id('viewer').style.display='block';
 	page='viewer';
 	pages.push(page);
+	*/
+	// CODE TO OPEN IN NEW TAB...
+	window.location.href=url;
 }
 
 
