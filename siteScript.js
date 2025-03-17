@@ -19,9 +19,9 @@ var library=[{'name':'Offbeat Belper','text':'Less-seen views around a Derbyshir
 {'name':'Retrofit101','text':'A simple guide to making your home energy efficient'},
 {'name':'ecollection','text':'Notes on energy in housing'},
 {'name':'Land of Hope','text':'An imagined future Orkney'}];
-var apps=[{'name':'Labels','text':'A Chrome extension which provides an icon-based alternative to bookmarking. Instead of saving bookmarks you can label websites with icons and retrieve them by searching for labels. To install, download the extension file, rename it "Labels.crx" and drag it into your Chromebook Extensions Manager page after enabling Developer mode.'},
+var apps=[{'name':'Labels','text':'A Chrome extension which provides an icon-based alternative to bookmarking. Instead of saving bookmarks you can label websites with icons and retrieve them by searching for labels. To install, download the extension file, rename it "Labels.crx" and drag it into your Chrome extensions manager page after enabling Developer mode - or equivalent for other browsers.'},
 {'name':'Ledger','text':'A phone app for the frugal in all of us - lets you keep track of your bank accounts, savings, investments, etc. Boring but useful.'},
-{'name':'Lines','text':'A simple but capable 2D drawing app for laptops, chromebooks or tablets. (Still under the final development and testing).<br>You can download the <a href="Lines User Guide.pdf" download><b>user guide</b> here</a>'},
+{'name':'Lines','text':'A simple but capable 2D drawing app for laptops, chromebooks or tablets. (Still under the final development and testing).<br>You can download the <a href="Lines user guide.pdf" download><b>user guide</b> here</a>'},
 {'name':'Lists','text':'An information repository for your phone. Lists allows you to add notes about whatever you like, organised in lists or lists of lists.'},
 {'name':'Locker','text':'Keep lists of anything you prefer not to share: bank PINs and logins, website credentials, safe combinations,... whatever. They are held on your phone in encrypted form and to open the app you enter a four-digit PIN'},
 {'name':'Locus','text':'Uses OpenStreetMap in its CyclOSM guise. Designed for cyclists, the app shows the latest open-source mapping including contours and cycle routes and allows you to plan and track your rides.'},
@@ -269,22 +269,22 @@ function listApps() {
 	// console.log('LIST APPS');
 	for(var i in apps) {
 		var listItem = document.createElement('li');
-		// listItem.classList.add('library-item');
-		listItem.index=i;
-		listItem.addEventListener('click', function() {
-			codeIndex=this.index;
-			// console.log('show app '+codeIndex);
-			openApp();
-		});
+		console.log('add app '+i+': '+apps[i].name);
 		images[i]=document.createElement('img');
 		images[i].classList.add('app-image');
 		images[i].src='appIcons/'+apps[i].name+'.png';
 		images[i].style.width='50px';
-		// console.log('code item: '+apps[i].name);
+		console.log('code item: '+apps[i].name);
 		listItem.appendChild(images[i]);
 		var caption=document.createElement('div');
+		caption.index=i;
 		caption.classList.add('app-caption');
-		caption.innerHTML=apps[i].name;
+		caption.innerHTML='<b>'+apps[i].name+'</b>';
+		caption.addEventListener('click', function() {
+			codeIndex=this.index;
+			console.log('show app '+codeIndex);
+			openApp();
+		});
 		listItem.appendChild(caption);
 		var text=document.createElement('div');
 		text.classList.add('app-text');
@@ -306,18 +306,6 @@ function listApps() {
 function openApp() {
 	// console.log('OPEN APP '+codeIndex);
 	var url='https://elvinibbotson.github.io/'+apps[codeIndex].name+'/';
-	// console.log('URL: '+url);
-	/* CODE TO OPEN IN WEBSITE...
-	id('view').type='text/html';
-	id('view').data=url;
-	id('view').height=sh+'px';
-	id('library').style.display='none';
-	id('header').style.display='none';
-	id('viewer').style.display='block';
-	page='viewer';
-	pages.push(page);
-	*/
-	// CODE TO OPEN IN NEW TAB...
 	window.location.href=url;
 }
 
@@ -372,6 +360,6 @@ sets=shuffle(sets); // at start, shuffle order of sets and of images in each set
 for(var i in sets) sets[i].images=shuffle(sets[i].images); 
 // console.log('shuffled first set: '+sets[0].name+'; first image: '+sets[0].images[0]);
 shuffle(library);
-shuffle(apps);
+// shuffle(apps);
 listSets();
 
