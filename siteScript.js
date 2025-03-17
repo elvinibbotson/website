@@ -82,6 +82,11 @@ id('logo').addEventListener('click',function() {
 	pages.push(page);
 	id(page).style.display='block';
 });
+id('currentSection').addEventListener('click',function() {
+	if(section<1) listSets();
+	else if(section==1) openLibrary();
+	else listApps();
+})
 id('nextSection').addEventListener('click',function() {
 	// SHIFT SECTIONS << IN HEADER AND SHOW LIST OF DRAWINGS, BOOKS OR APPS
 	section=(section+1)%3;
@@ -157,9 +162,9 @@ function listSets() {
 
 // SHOW CURRENT SET
 function openSet() {
-	// console.log('SHOW SET '+setIndex);
+	console.log('SHOW SET '+setIndex);
 	setImages=sets[setIndex].images;
-	// console.log(setImages.length+' images in set '+sets[setIndex].name);
+	console.log(setImages.length+' images in set '+sets[setIndex].name);
 	id('setItems').innerHTML='';
 	for(var i in setImages) {
 		var listItem = document.createElement('li');
@@ -201,12 +206,12 @@ function openSet() {
 	id('setTitle').innerHTML='<b>'+sets[setIndex].name+'</b>';
 	id('setText').innerHTML=sets[setIndex].text;
 	id(page).style.display='none';
-	id('header').style.display='none';
+	// id('header').style.display='none';
 	id('setItems').scrollTop=0;
 	page='set';
 	id(page).style.display='block';
 	pages.push(page);
-	// console.log(pages.length+' pages');
+	console.log(pages.length+' pages');
 }
 
 function openLibrary() {
