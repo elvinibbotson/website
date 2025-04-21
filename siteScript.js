@@ -24,7 +24,7 @@ var apps=[{'name':'Labels','text':'A Chrome extension which provides an icon-bas
 {'name':'Lines','text':'A simple but capable 2D drawing app for laptops, chromebooks or tablets. (Still under the final development and testing).<br>You can download the <a href="Lines user guide.pdf" download><b>user guide</b> here</a>'},
 {'name':'Lists','text':'An information repository for your phone. Lists allows you to add notes about whatever you like, organised in lists or lists of lists.'},
 {'name':'Locker','text':'Keep lists of anything you prefer not to share: bank PINs and logins, website credentials, safe combinations,... whatever. They are held on your phone in encrypted form and to open the app you enter a four-digit PIN'},
-{'name':'Locus','text':'Uses OpenStreetMap in its CyclOSM guise. Designed for cyclists, the app shows the latest open-source mapping including contours and cycle routes and allows you to plan and track your rides.'},
+{'name':'Locus','text':'For walkers or cyclists, uses OpenStreetMap in its standard or CyclOSM guise. The app shows the latest open-source mapping and allows you to plan and track your walks and rides.'},
 {'name':'Logbook','text':'Record significant events and activities and label them, making them easy to find by date, label or content.'},
 {'name':'Losses','text':'Relatively quick and easy estimation of fabric heat losses from a building as an aid at the design stage or to assess possible retrofit measures. You define building elements (walls, roof, openings, etc) by area and construction using a menu of predefined materials or specifying your own.'}]
 // GLOBAL VARIABLES
