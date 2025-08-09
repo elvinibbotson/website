@@ -20,13 +20,11 @@ var library=[{'name':'Offbeat Belper','text':'Less-seen views around a Derbyshir
 {'name':'ecollection','text':'Notes on energy in housing'},
 {'name':'Land of Hope','text':'An imagined future Orkney'}];
 var apps=[{'name':'Labels','text':'A Chrome extension which provides an icon-based alternative to bookmarking. Instead of saving bookmarks you can label websites with icons and retrieve them by searching for labels. To install, download the extension file, rename it "Labels.crx" and drag it into your Chrome extensions manager page after enabling Developer mode - or equivalent for other browsers.'},
-{'name':'Ledger','text':'A phone app for the frugal in all of us - lets you keep track of your bank accounts, savings, investments, etc. Boring but useful.'},
-{'name':'Lines','text':'A simple but capable 2D drawing app for laptops, chromebooks or tablets. (Still under the final development and testing).<br>You can download the <a href="Lines user guide.pdf" download><b>user guide</b> here</a>'},
+{'name':'Money','text':'A phone app for the frugal in all of us - lets you keep track of your bank accounts, savings, investments, etc. Boring but useful.'},
 {'name':'Lists','text':'An information repository for your phone. Lists allows you to add notes about whatever you like, organised in lists or lists of lists.'},
 {'name':'Locker','text':'Keep lists of anything you prefer not to share: bank PINs and logins, website credentials, safe combinations,... whatever. They are held on your phone in encrypted form and to open the app you enter a four-digit PIN'},
-{'name':'Locus','text':'For walkers or cyclists, uses OpenStreetMap in its standard or CyclOSM guise. The app shows the latest open-source mapping and allows you to plan and track your walks and rides.'},
-{'name':'Logbook','text':'Record significant events and activities and label them, making them easy to find by date, label or content.'},
-{'name':'Losses','text':'Relatively quick and easy estimation of fabric heat losses from a building as an aid at the design stage or to assess possible retrofit measures. You define building elements (walls, roof, openings, etc) by area and construction using a menu of predefined materials or specifying your own.'}]
+{'name':'Map','text':'For walkers or cyclists, uses OpenStreetMap in its standard or CyclOSM guise. The app shows the latest open-source mapping and allows you to plan and track your walks and rides.'},
+{'name':'Logbook','text':'Record significant events and activities and label them, making them easy to find by date, label or content.'},]
 // GLOBAL VARIABLES
 var sections=['gallery','library','code'];
 var section=0; // start in gallery section
